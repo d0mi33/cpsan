@@ -5,6 +5,7 @@ import os
 import time
 import warnings
 
+
 def run_command(command):
     try:
         print(f"Executing command: {command}")  # Debug: Log the command
@@ -91,32 +92,56 @@ def main():
 
         print(f"Detailed nmap scan results saved to {nmap_detailed_file}")
 
-        # Step 3: Identify HTTP services from the nmap detailed scan
-        print("Identifying HTTP services...")
+        # Step 3: Identify HTTP and HTTPS services from the nmap detailed scan
+        print("Identifying HTTP and HTTPS services...")
         http_ports = []
+        https_ports = []
         for line in nmap_detailed_output.splitlines():
-            if "http" in line and "/tcp" in line and "open" in line:
-                port = line.split("/")[0]
-                http_ports.append(port)
+            if "/tcp" in line and "open" in line:
+                parts = line.split()
+                if len(parts) >= 3:
+                    port_part = parts[0]
+                    port = port_part.split('/')[0]
+                    service = parts[2].lower()
+                    if service == 'http':
+                        http_ports.append(port)
+                    elif service in ['ssl/http', 'https']:
+                        https_ports.append(port)
 
-        print(f"Ports with HTTP services: {http_ports}")
+        print(f"HTTP ports: {http_ports}")
+        print(f"HTTPS ports: {https_ports}")
 
-        # Step 4: Run subdomain enumeration for each HTTP service port
-        if http_ports:
+        # Step 4: Run subdomain enumeration for each HTTP and HTTPS service port
+        if http_ports or https_ports:
+            # Handle HTTP ports
             for http_port in http_ports:
                 print_animation()
-                print(f"\nRunning subdirectory scan on port {http_port}...")
+                print(f"\nRunning subdirectory scan on HTTP port {http_port}...")
                 feroxbuster_cmd = f"feroxbuster -u http://{ip}:{http_port} -C 400,404,403,503 -n"
                 feroxbuster_output = run_command(feroxbuster_cmd)
 
                 # Save feroxbuster output
-                feroxbuster_file = os.path.join(output_dir, f"subdomain_enum_port_{http_port}.txt")
+                feroxbuster_file = os.path.join(output_dir, f"subdomain_enum_http_{http_port}.txt")
                 with open(feroxbuster_file, "w") as f:
                     f.write(feroxbuster_output)
 
-                print(f"Subdirectory scan results for port {http_port} saved to {feroxbuster_file}")
+                print(f"Subdirectory scan results for HTTP port {http_port} saved to {feroxbuster_file}")
+
+            # Handle HTTPS ports
+            for https_port in https_ports:
+                print_animation()
+                print(f"\nRunning subdirectory scan on HTTPS port {https_port}...")
+                feroxbuster_cmd = f"feroxbuster -u https://{ip}:{https_port} -k -C 400,404,403,503 -n"
+                feroxbuster_output = run_command(feroxbuster_cmd)
+
+                # Save feroxbuster output
+                feroxbuster_file = os.path.join(output_dir, f"subdomain_enum_https_{https_port}.txt")
+                with open(feroxbuster_file, "w") as f:
+                    f.write(feroxbuster_output)
+
+                print(f"Subdirectory scan results for HTTPS port {https_port} saved to {feroxbuster_file}")
         else:
-            print("No HTTP services found. Skipping subdirectory scans.")
+            print("No HTTP or HTTPS services found. Skipping subdirectory scans.")
     else:
         print("No open ports found. Skipping detailed nmap scan.")
 
@@ -132,6 +157,7 @@ def main():
         f.write(udp_scan_output)
 
     print(f"UDP scan results saved to {udp_scan_file}")
+
 
 if __name__ == "__main__":
     main()
