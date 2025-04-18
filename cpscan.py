@@ -46,7 +46,6 @@ def main():
         print("Usage: python3 cp_scan.py <IP>")
         sys.exit(1)
 
-    # Display ASCII art
     print_ascii_art()
 
     ip = sys.argv[1]
@@ -77,7 +76,7 @@ def main():
     # Ensure only port numbers in the open_ports list
     open_ports = [port.split()[-1] if "Discovered" in port else port for port in open_ports]
 
-    # Step 2: Run nmap -sC -sV -sT scan on open ports
+    # Step 2: Run nmap -sCV scan on open ports
     if open_ports:
         open_ports_str = ",".join(open_ports)  # Ensure ports are comma-separated
         print_animation()
@@ -117,7 +116,7 @@ def main():
             for http_port in http_ports:
                 print_animation()
                 print(f"\nRunning subdirectory scan on HTTP port {http_port}...")
-                feroxbuster_cmd = f"feroxbuster -u http://{ip}:{http_port} -C 400,404,403,503 -n"
+                feroxbuster_cmd = f"feroxbuster -u http://{ip}:{http_port} -C 400,404,403,503"
                 feroxbuster_output = run_command(feroxbuster_cmd)
 
                 # Save feroxbuster output
