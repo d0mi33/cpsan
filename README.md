@@ -11,25 +11,25 @@ CP Scan was created with pentesting in mind. It quickly identifies open ports, a
 
 ## Installation  
 ```bash
-git clone https://github.com/<your-username>/cp_scan.git  
-cd cp_scan  
-chmod +x cp_scan.py  
+git clone https://github.com/domm-t/cpsan.git 
+cd cpscan  
+chmod +x cpscan.py  
 ```
 
 ## Run the script  
 ```bash
-python3 cp_scan.py <TARGET_IP>
+python3 cpscan.py <TARGET_IP>
 ```
 
 ## Add the script globally (optional)  
 You can run `cp_scan` from anywhere by adding it to `/usr/local/bin`:  
 ```bash
-sudo cp cp_scan.py /usr/local/bin/cp_scan  
-sudo chmod +x /usr/local/bin/cp_scan  
+sudo cp cpscan.py /usr/local/bin/cpscan  
+sudo chmod +x /usr/local/bin/cpscan  
 ```
 Now you can run:  
 ```bash
-cp_scan <TARGET_IP>
+cpscan <TARGET_IP>
 ```
 
 ## Dependencies  
@@ -41,7 +41,7 @@ sudo apt install feroxbuster
 
 ## Example Usage  
 ```bash
-cp_scan 192.168.1.1
+cpscan 192.168.1.1
 ```
 - Performs an **initial fast scan** to identify open ports.  
 - Runs a **detailed service scan** on discovered ports.  
