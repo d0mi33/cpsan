@@ -1,4 +1,4 @@
-# CP Scan - Quick and Efficient Pentesting Enum Script 🚀  
+# CPScan - Quick and Efficient Pentesting Enum Script 🚀  
 
 CP Scan was created with pentesting in mind. It quickly identifies open ports, allowing you to start enumeration while a full scan runs in the background. The script generates clean output files and even performs subdirectory enumeration with **Feroxbuster** using its default wordlist (which you can change).  
 
@@ -22,7 +22,7 @@ python3 cpscan.py <TARGET_IP>
 ```
 
 ## Add the script globally (optional)  
-You can run `cp_scan` from anywhere by adding it to `/usr/local/bin`:  
+You can run `cpscan` from anywhere by adding it to `/usr/local/bin`:  
 ```bash
 sudo cp cpscan.py /usr/local/bin/cpscan  
 sudo chmod +x /usr/local/bin/cpscan  
