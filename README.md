@@ -1,6 +1,6 @@
 # CPScan - Quick and Efficient Pentesting Enum Script 🚀 
 # Will aid you in exams like OSCP
-
+![Demo](cpscan.gif)
 CP Scan was created with pentesting in mind. It quickly identifies open ports, allowing you to start enumeration while a full scan runs in the background. The script generates clean output files and even performs subdirectory enumeration with **Feroxbuster** using its default wordlist (which you can change).  
 
 ## Features  
