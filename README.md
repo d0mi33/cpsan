@@ -49,9 +49,11 @@ cpscan 192.168.1.1
 - Performs an **initial fast scan** to identify open ports.  
 - Runs a **detailed service scan** on discovered ports.  
 - Checks for **HTTP services** and **runs Feroxbuster** for directory enumeration.  
-- Finally, performs a **UDP scan** on the top 100 ports.  
+- Finally, performs a **UDP scan** on the top 100 ports.
+![Demo](fscan.jpg)
 
 ## Output Files  
+![Demo](ffiles.jpg)
 Results are saved in a folder named `output_<TARGET_IP>`:  
 ```
 output_192.168.1.1/
