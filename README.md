@@ -50,6 +50,7 @@ cpscan 192.168.1.1
 - Runs a **detailed service scan** on discovered ports.  
 - Checks for **HTTP services** and **runs Feroxbuster** for directory enumeration.  
 - Finally, performs a **UDP scan** on the top 100 ports.
+
 ![Demo](fscan.jpg)
 
 ## Output Files  
