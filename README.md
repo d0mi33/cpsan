@@ -54,6 +54,7 @@ cpscan 192.168.1.1
 
 ## Output Files  
 ![Demo](ffiles.jpg)
+
 Results are saved in a folder named `output_<TARGET_IP>`:  
 ```
 output_192.168.1.1/
