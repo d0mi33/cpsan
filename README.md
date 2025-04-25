@@ -67,6 +67,4 @@ output_192.168.1.1/
 
 ## Disclaimer  
 This tool is intended for **legal** penetration testing and research **only**. **Do not use** it on unauthorized systems.  
-
----
-⭐ **Star this repo if you find it useful!** 🚀  
+  
